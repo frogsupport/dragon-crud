@@ -34,3 +34,15 @@
   font-size: large;
   font-weight: bold;
 }
+
+.dragonButton {
+  margin-bottom: 10px;
+}
+
+.dragonsList {
+  margin-bottom: 50px;
+}
+
+.dragonsList h2 {
+  text-align: center;
+}

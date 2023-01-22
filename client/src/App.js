@@ -3,41 +3,42 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
+  const dragonsRoute = "http://localhost:3001/dragons";
+
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
   const [dragonType, setDragonType] = useState("");
   const [gender, setGender] = useState("");
   const [size, setSize] = useState("");
 
-  const displayDragonInformation = () => {
-    console.log(
-      "Dragon Information\n" +
-        "Name: " +
-        name +
-        "\nAge: " +
-        age +
-        "\nDragon Type: " +
-        dragonType +
-        "\nGender: " +
-        gender +
-        "\nSize: " +
-        size
-    );
-  };
+  const [dragonsList, setDragonsList] = useState([])
 
+  // Add dragon POST request
   const addDragon = () => {
     axios
-      .post("http://localhost:3001/dragons", {
+      .post(dragonsRoute, {
         name: name,
         age: age,
         dragonType: dragonType,
         gender: gender,
         size: size,
       })
-      .then(() => console.log("Success!\n" + Response.toString()));
-    console.log("Request sent successfully");
-    displayDragonInformation();
+      .then(setDragonsList([...dragonsList, {
+        name: name,
+        age: age,
+        dragonType: dragonType,
+        gender: gender,
+        size: size,
+      }]));
   };
+
+  // Get dragons GET request
+  const getDragons = () => {
+    axios.get(dragonsRoute).then((response) => {
+      console.log(response);
+      setDragonsList(response.data);
+    })
+  }
 
   return (
     <div className="App">
@@ -82,6 +83,19 @@ function App() {
           }}
         />
         <button onClick={addDragon}>Add Dragon</button>
+        <hr width="100%" height="1px"/>
+        <div className="dragonButton" onClick={getDragons}><button>Show Dragons</button></div>
+        <div className="dragonsList">
+          <h2>Dragons</h2>
+          {dragonsList.map((val, key) => {
+            return <div className="dragonItem">
+            <hr width="100%" height="1px"/>
+            <h3>Name: {val.name}, Age: {val.age}, Dragon Type: {val.dragonType}, <br/> Gender: {val.gender}, Size: {val.size}</h3>
+            <hr width="100%" height="1px"/>
+            </div>
+          })}
+        </div>
+        
       </div>
     </div>
   );

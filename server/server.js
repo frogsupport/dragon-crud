@@ -21,18 +21,28 @@ server.listen(port, () => {
     console.log(`Server listening on port ${port}...`);
 })
 
+// Server logic for GET requests on the resource /dragons
+server.get(dragonsRoute, (req, res) => {
+    console.log("Received GET request");
+    db.query(`SELECT * FROM ${dragonsTableName}`, (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.send(result);
+        }
+    });
+})
 
+// Server logic for POST requests on the resource /dragons
 server.post(dragonsRoute, (req, res) => {
     console.log("Received POST request");
-    console.log("Request body is: " + req.body);
 
     const name = req.body.name;
     const age = req.body.age;
     const dragonType = req.body.dragonType;
     const gender = req.body.gender;
     const size = req.body.size;
-
-    console.log("Recieved POST request");
 
     db.query(
         `INSERT INTO ${dragonsTableName} (name, age, dragonType, gender, size) VALUES (?,?,?,?,?)`, 
