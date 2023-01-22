@@ -1,8 +1,21 @@
-# Getting Started with Create React App
+# Dragon-Crud
+A basic CRUD application
+
+## How to Use
+
+This application utilizes several different technologies in the client and server folders. 
+
+### Client
+Run `yarn start` in the client subdirectory to start the react app.
+
+### Server
+Run `npm run start` in the server subdirectory to start the server.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Available Scripts in the Client Folder
 
 In the project directory, you can run:
 
