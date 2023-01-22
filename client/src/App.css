@@ -1,3 +1,36 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.input-information {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-information label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.input-information button {
+  margin-top: 1em;
+}
+
+.input-information button:hover {
+  cursor: pointer;
+}
+
+.title {
   text-align: center;
+}
+
+.title p {
+  font-size: large;
+  font-weight: bold;
 }

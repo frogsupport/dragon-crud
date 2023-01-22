@@ -1,15 +1,22 @@
 # Dragon-Crud
+
 A basic CRUD application
 
 ## How to Use
 
-This application utilizes several different technologies in the client and server folders. 
+This application utilizes several different technologies in the client and server folders.
 
 ### Client
+
 Run `yarn start` in the client subdirectory to start the react app.
 
 ### Server
+
 Run `npm run start` in the server subdirectory to start the server.
+
+### Notes
+
+The `npm run start` command for the server compiles the typescript down to the javascript which allows node to run it. Node is other wise not set up to just run typescript files.
 
 ## Getting Started with Create React App
 
