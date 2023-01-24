@@ -11,7 +11,7 @@ function App() {
   const [gender, setGender] = useState("");
   const [size, setSize] = useState("");
 
-  const [dragonsList, setDragonsList] = useState([])
+  const [dragonsList, setDragonsList] = useState([]);
 
   // Add dragon POST request
   const addDragon = () => {
@@ -23,13 +23,18 @@ function App() {
         gender: gender,
         size: size,
       })
-      .then(setDragonsList([...dragonsList, {
-        name: name,
-        age: age,
-        dragonType: dragonType,
-        gender: gender,
-        size: size,
-      }]));
+      .then(
+        setDragonsList([
+          ...dragonsList,
+          {
+            name: name,
+            age: age,
+            dragonType: dragonType,
+            gender: gender,
+            size: size,
+          },
+        ])
+      );
   };
 
   // Get dragons GET request
@@ -37,8 +42,8 @@ function App() {
     axios.get(dragonsRoute).then((response) => {
       console.log(response);
       setDragonsList(response.data);
-    })
-  }
+    });
+  };
 
   return (
     <div className="App">
@@ -83,19 +88,26 @@ function App() {
           }}
         />
         <button onClick={addDragon}>Add Dragon</button>
-        <hr width="100%" height="1px"/>
-        <div className="dragonButton" onClick={getDragons}><button>Show Dragons</button></div>
+        <hr width="100%" height="1px" />
+        <div className="dragonButton" onClick={getDragons}>
+          <button>Show Dragons</button>
+        </div>
         <div className="dragonsList">
           <h2>Dragons</h2>
           {dragonsList.map((val, key) => {
-            return <div className="dragonItem">
-            <hr width="100%" height="1px"/>
-            <h3>Name: {val.name}, Age: {val.age}, Dragon Type: {val.dragonType}, <br/> Gender: {val.gender}, Size: {val.size}</h3>
-            <hr width="100%" height="1px"/>
-            </div>
+            return (
+              <div className="dragonItem">
+                <hr width="100%" height="1px" />
+                <h3>
+                  Name: {val.name}, Age: {val.age}, Dragon Type:{" "}
+                  {val.dragonType}, <br /> Gender: {val.gender}, Size:{" "}
+                  {val.size}
+                </h3>
+                <hr width="100%" height="1px" />
+              </div>
+            );
           })}
         </div>
-        
       </div>
     </div>
   );
