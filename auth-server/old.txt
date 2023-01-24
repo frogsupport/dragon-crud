@@ -1,0 +1,51 @@
+db.query(
+  `
+SELECT u.username, u.password
+FROM ${constants.usersTableName} AS u
+WHERE username = '${username}'`,
+  async (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send();
+    } else {
+      // If the user does not exist
+      if (result.at(0) == null) {
+        return res.status(400).send("Cannot find user");
+      }
+      try {
+        if (await bcrypt.compare(req.body.password, result.at(0).password)) {
+          // If the user is authenticated
+          res.status(200).send("Login success");
+        } else {
+          // If the user is unsuccessfully authenticated
+          res.status(400).send("Not allowed");
+        }
+      } catch (err) {
+        console.log(err);
+        // If bcrypt has an issue
+        res.status(500).send();
+      }
+    }
+  }
+);
+
+
+const promise = new Promise((resolve, reject) => {
+    let authenticationResult = authenticateAsync(username, password);
+
+    if (authenticationResult) {
+      resolve("Success");
+    } else {
+      reject("Failure");
+    }
+  });
+
+  promise.then(console.log("We got through the promise")).catch("Error");
+
+  if (authenticateAsync(username, password)) {
+    console.log("Auth function success");
+    res.status(200).send("Login Success");
+  } else {
+    console.log("Auth function failure");
+    res.status(500).send("Server failure");
+  }

@@ -1,7 +1,14 @@
 const bcrypt = require("bcrypt");
+const db = require("./query.js");
 
-const authenticate = async (requestPassword, hashedPassword) => {
-  return await bcrypt.compare(requestPassword, hashedPassword);
+let authenticateAsync = (username, password, callback) => {
+  db.authenticateAsync(username, async (result) => {
+    if (await bcrypt.compare(password, result.password)) {
+      return callback(true);
+    } else {
+      return callback(false);
+    }
+  });
 };
 
-module.exports = { authenticate };
+module.exports = { authenticateAsync };
