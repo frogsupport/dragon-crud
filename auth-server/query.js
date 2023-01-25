@@ -3,6 +3,8 @@ const constants = require("./constants.js");
 
 const db = mysql.createConnection(constants.dbConnection);
 
+// Queries the users database for the password of the user
+// based on the given username field
 let authenticateAsync = (username, callback) => {
   db.query(
     `
